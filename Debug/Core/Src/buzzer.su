@@ -1,0 +1,4 @@
+../Core/Src/buzzer.c:7:6:StartBuzzer	16	static
+../Core/Src/buzzer.c:13:6:StopBuzzer	16	static
+../Core/Src/buzzer.c:18:6:pressBuzzer	24	static
+../Core/Src/buzzer.c:31:6:music	24	static
