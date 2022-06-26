@@ -20,15 +20,16 @@ void tick(CLOCK* clock)
 	clock-> timCounterms++;
 }
 
-void printFullTime(CLOCK* clock)
+CLOCK* getFullTime(CLOCK* clock)
 {
-	int hours, minuts, seconds;
+	//int hours, minuts, seconds;
 
-	hours = clock -> timCounterms/3600;
-	minuts = (clock -> timCounterms - hours*3600)/60;
-    seconds = clock -> timCounterms - hours*3600 - minuts*60;
+	clock-> hours = clock -> timCounterms/3600;
+	clock-> minuts = (clock -> timCounterms - clock->hours*3600)/60;
+    clock-> seconds = clock -> timCounterms - clock->hours*3600 - clock->minuts*60;
 
-	printf("%d seconds = %d hours : %d minutes : %d seconds\n\r", clock -> timCounterms, hours, minuts, seconds);
+    return clock;
+	//printf("%d seconds = %d hours : %d minutes : %d seconds\n\r", clock -> timCounterms, hours, minuts, seconds);
 }
 
 

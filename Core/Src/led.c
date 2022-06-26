@@ -2,7 +2,7 @@
 #include "led.h"
 #include "main.h"
 
-extern TIM_HandleTypeDef htim6;
+extern TIM_HandleTypeDef htim6, htim2;
 extern int brightnessValue;
 extern uint32_t prevTick;
 
@@ -46,6 +46,12 @@ void LedOnTimerInterrupt(LED* led)
 	{
 		led->counter ++;
 	}
+}
+
+void StartPWM()
+{
+	HAL_TIM_Base_Start_IT(&htim2);
+	HAL_TIM_PWM_Start_IT(&htim2, TIM_CHANNEL_1);
 }
 
 

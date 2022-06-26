@@ -1,2 +1,2 @@
 ../Core/Src/button.c:9:6:ButtonInit	24	static
-../Core/Src/button.c:16:6:PressBtn	24	static
+../Core/Src/button.c:16:13:getButtonState	24	static

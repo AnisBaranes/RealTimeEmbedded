@@ -8,10 +8,11 @@
 typedef struct _clock
 {
 	int timCounterms;
+	int hours, minuts, seconds;
 }CLOCK;
 
 void startTimer(TIM_HandleTypeDef *timer, CLOCK* clock);
-void printFullTime(CLOCK* clock);
+CLOCK* getFullTime(CLOCK* clock);
 void tick(CLOCK* clock);
 
 #endif

@@ -24,4 +24,5 @@ void LedBlink(LED* led, int period);
 void LedOnTimerInterrupt(LED* led);
 void LedOnPeriodicTask(LED* led);
 
+void StartPWM();
 #endif

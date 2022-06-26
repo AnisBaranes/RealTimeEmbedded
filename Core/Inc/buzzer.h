@@ -2,11 +2,23 @@
 #define __BUZZER_H
 
 #include "main.h"
-#include "button.h"
 
+typedef enum
+{
+	buzzerOn,
+	buzzerOff
+}BuzzerState ;
+
+typedef struct _buzzer
+{
+	int* autoReload;
+	int  autoReloadLen;
+	BuzzerState buzzerState;
+}BUZZER;
+
+void BuzzerInit(BUZZER* buzzer, int* autoReload, int autoReloadLen);
 void StartBuzzer(TIM_HandleTypeDef *timer);
 void StopBuzzer(TIM_HandleTypeDef *timer);
-void pressBuzzer(TIM_HandleTypeDef *timer, BUTTON* btn);
-void music(TIM_HandleTypeDef *timer, int autoReload, int autoReloadTim6);
+void music(TIM_HandleTypeDef *timer, int autoReload);
 
 #endif

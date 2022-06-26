@@ -4,6 +4,12 @@
 #include "button.h"
 
 
+void BuzzerInit(BUZZER* buzzer, int* autoReload, int autoReloadLen)
+{
+	buzzer->autoReload = autoReload;
+	buzzer->autoReloadLen =  autoReloadLen;
+}
+
 void StartBuzzer(TIM_HandleTypeDef *timer)
 {
 	HAL_TIM_Base_Start(timer);
@@ -15,20 +21,7 @@ void StopBuzzer(TIM_HandleTypeDef *timer)
 	HAL_TIM_PWM_Stop(timer, TIM_CHANNEL_1);
 }
 
-void pressBuzzer(TIM_HandleTypeDef *timer, BUTTON* btn)
-{
-	GPIO_PinState resPin = HAL_GPIO_ReadPin(btn->GPIOx, btn->GPIO_Pin);  //(B2_GPIO_Port, B2_Pin);
-	if(resPin == GPIO_PIN_RESET)
-	{
-		StartBuzzer(timer);
-	}
-	else
-	{
-		StopBuzzer(timer);
-	}
-}
-
-void music(TIM_HandleTypeDef *timer, int autoReload, int autoReloadTim6)
+void music(TIM_HandleTypeDef *timer, int autoReload)
 {
 	__HAL_TIM_SET_COUNTER(timer, 0);
 	__HAL_TIM_SET_AUTORELOAD(timer, autoReload);

@@ -1,5 +1,11 @@
-../Core/Src/mymain.c:21:6:mainloop	8	static
-../Core/Src/mymain.c:35:5:_write	24	static
-../Core/Src/mymain.c:41:6:HAL_TIM_PeriodElapsedCallback	16	static
-../Core/Src/mymain.c:51:5:commTask	16	static
-../Core/Src/mymain.c:100:6:handleCommand	40	static
+../Core/Src/mymain.c:35:6:mainloop	8	static
+../Core/Src/mymain.c:55:6:ledsInit	8	static
+../Core/Src/mymain.c:62:6:buttonsInit	8	static
+../Core/Src/mymain.c:68:6:OnButtonClickTurnOnLed	24	static
+../Core/Src/mymain.c:78:6:pressBuzzer	24	static
+../Core/Src/mymain.c:91:5:_write	24	static
+../Core/Src/mymain.c:97:6:HAL_TIM_PeriodElapsedCallback	16	static
+../Core/Src/mymain.c:121:6:HAL_GPIO_EXTI_Callback	16	static
+../Core/Src/mymain.c:130:6:HAL_TIM_PWM_PulseFinishedCallback	16	static
+../Core/Src/mymain.c:139:5:commTask	16	static
+../Core/Src/mymain.c:188:6:handleCommand	40	static
