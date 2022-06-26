@@ -17,6 +17,8 @@ void buttonsInit();
 void OnButtonClickTurnOnLed(BUTTON* btn, LED* led);
 void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin);
 void pressBuzzer(TIM_HandleTypeDef *timer, BUTTON* btn);
+void checkPress(BUTTON* btn);
+void togglePin(LED *led);
 
 #endif
 

@@ -10,28 +10,44 @@ void ButtonInit(BUTTON* btn, GPIO_TypeDef* GPIOx, uint16_t GPIO_Pin)
 {
 	btn->GPIO_Pin = GPIO_Pin;
 	btn->GPIOx = GPIOx;
+	btn->counterDoublePress = 0;
 }
 
 
-ButtonState getButtonState(BUTTON* btn)
+void setButtonState(BUTTON* btn)
 {
 	GPIO_PinState resPin = HAL_GPIO_ReadPin(btn->GPIOx, btn->GPIO_Pin);
 	if(resPin == GPIO_PIN_RESET)
 	{
-		if(HAL_GetTick() - prevTick < 500)
+		if(btn->buttonState == shortPress && btn->counterDoublePress < 500) //if last press was short press and there is another press less than 500 ms
 		{
-			return shortPress; //printf("Short press\n\r");
+			btn->buttonState = doublePress;
+		}
+		else if(HAL_GetTick() - prevTick < 500)
+		{
+			btn->buttonState = shortPress;
 		}
 		else
 		{
-			return longPress; //printf("Long press\n\r");
+			btn->buttonState = longPress;
 		}
 	}
 	else
 	{
 		prevTick = HAL_GetTick();
 	}
-	return noPress;
 }
 
 
+int ButtonOnTimerInterrupt(BUTTON* btn)
+{
+	if(btn->counterDoublePress == 500)
+	{
+		btn->counterDoublePress = 0;
+	}
+	else
+	{
+		btn->counterDoublePress ++;
+	}
+	return btn->counterDoublePress;
+}

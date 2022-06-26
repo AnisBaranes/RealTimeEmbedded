@@ -33,9 +33,10 @@ void LedBlink(LED* led, int period)
 	led->state = LED_BLINK;
 	led->peroid = period;
 	led->counter = 0;
+	//HAL_GPIO_WritePin(led->GPIOx, led->GPIO_Pin, 0);
 }
 
-void LedOnTimerInterrupt(LED* led)
+void LedOnTimerInterrupt_my(LED* led)
 {
 	if(led->counter == led->peroid)
 	{
@@ -47,6 +48,22 @@ void LedOnTimerInterrupt(LED* led)
 		led->counter ++;
 	}
 }
+
+
+
+
+void LedOnTimerInterrupt(LED* led)
+{
+	if (led->state == LED_BLINK) {
+		led->counter++;
+		if (led->counter == led->peroid) {
+			HAL_GPIO_TogglePin(led->GPIOx, led->GPIO_Pin);
+			led->counter = 0;
+		}
+	}
+}
+
+
 
 void StartPWM()
 {

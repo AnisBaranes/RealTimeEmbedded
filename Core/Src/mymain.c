@@ -25,6 +25,7 @@ int autoReload[] = {381, 361, 340, 321, 303, 289, 270, 255, 240, 227, 214, 202};
 int autoReloadIndex = 0;
 int autoReloadLen = sizeof(autoReload) / sizeof(autoReload[0]);
 int _level = 0;
+uint32_t prevTick = 0;
 
 CLOCK clock;
 LED ledRed;
@@ -40,7 +41,10 @@ void mainloop()
 
 	//OnButtonClickTurnOnLed(&d2, &ledRed);
 
-	StartPWM();
+	//StartPWM(); //brightness
+
+	//Led blink
+	//LedBlink(&ledRed, 10);
 
 	while (1)
 	{
@@ -109,14 +113,29 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef * htim)
 //		{
 //			autoReloadIndex = 0;
 //		}
+
+		//Led blink
+		//LedOnTimerInterrupt(&ledRed);
+
+
+		//togglePin(&ledBlue);  //TASK 14 - short/long press/double press
+
+		ButtonOnTimerInterrupt(&d2);
 	}
 
-	else if(htim == &htim2) //Brightness
-	{
-		LedOn(&ledBlue);
-	}
+//	else if(htim == &htim2) //Brightness
+//	{
+//		LedOn(&ledBlue);
+//	}
 
 }
+
+
+void togglePin(LED *led)
+{
+	HAL_GPIO_TogglePin(led->GPIOx, led->GPIO_Pin);
+}
+
 
 void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
 {
@@ -125,6 +144,34 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
 	//Brightness
 	_level = (_level + 10) % 100;
 	__HAL_TIM_SET_COMPARE(&htim2, TIM_CHANNEL_1, _level);
+
+
+	//TASK 14- short/long press
+
+	checkPress(&d2);
+
+
+}
+
+
+void checkPress(BUTTON* btn)
+{
+	setButtonState(btn);
+	switch(btn->buttonState)
+	{
+		case noPress:
+			printf("no press\n\r");
+			break;
+		case shortPress:
+			printf("shortPress\n\r");
+			break;
+		case longPress:
+			printf("longPress\n\r");
+			break;
+		case doublePress:
+			printf("doublePress\n\r");
+			break;
+	}
 }
 
 

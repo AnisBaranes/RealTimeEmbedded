@@ -7,16 +7,19 @@ typedef enum {
 	noPress,
 	shortPress,
 	longPress,
+	doublePress
 }ButtonState;
 
 typedef struct _button{
 	GPIO_TypeDef* GPIOx;
 	uint16_t GPIO_Pin;
 	ButtonState buttonState;
+	int counterDoublePress;
 }BUTTON;
 
 
 void ButtonInit(BUTTON* btn, GPIO_TypeDef* GPIOx, uint16_t GPIO_Pin);
-ButtonState getButtonState(BUTTON* btn);
+void setButtonState(BUTTON* btn);
+int ButtonOnTimerInterrupt(BUTTON* btn);
 
 #endif
